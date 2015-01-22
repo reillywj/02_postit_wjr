@@ -1,11 +1,13 @@
-<p class='lead'>
-  <%= @post.title %>
-</hr>
-</p>
+<%= render 'shared/content_title', title: @post.title %>
+
 <h5>
   <span>By <%= @post.creator.username%></span>
   <small>at <%= @post.created_at%></small>
 </h5>
+
+<p>
+  <%= render @post.categories %>
+</p>
 
 <div class='row'>
   <div class='span8 well'>
@@ -22,20 +24,11 @@
     <div class='span8 well'>
       <p>
         <%= comment.body %>
-        <span class='quiet'>from <%= comment.creator.username%></span>
+        <span class='quiet'>says <%= comment.creator.username%></span>
       </p>
 
     </div>
   </div>
 <% end %>
-
-<div>
-  <h6>This post falls under <%= pluralize(@post.categories.size, 'category')%></h6>
-  <ul>
-    <% @post.categories.each do |category| %>
-      <li><%= link_to category.name, root_path%></li>
-    <% end %>
-  </ul>
-</div>
 
 <%= link_to 'Go Back to Posts', posts_path %>
