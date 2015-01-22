@@ -1,7 +1,19 @@
-<h3>All Posts</h3>
+<p class='lead'>
+  All Posts
+</hr>
+</p>
 
-<ul>
-  <% @posts.each do |post| %>
-    <li><%= link_to post.title, post_path(post)%> by <%= post.creator.username %></li>
-  <% end %>
-</ul>
+
+<% @posts.each do |post| %>
+  <div class = 'row'>
+    <div class= 'span8 well'>
+      <h4><%= link_to post.title, post_path(post)%></h4>
+      <p><%= post.description %></p>
+      <p>
+        <span class='quiet'>Posted by </span><%= post.creator.username %>
+        <small>at <%= post.created_at%></small>
+      </p>
+      <%= link_to pluralize(post.comments.size, "comment"), post_path(post) %>
+    </div>
+  </div>
+<% end %>
