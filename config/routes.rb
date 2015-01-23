@@ -4,5 +4,11 @@ PostitTemplate::Application.routes.draw do
   # resources :posts, except: [:destroy] do
   #   resources :comments, only: [:create, :show]
   # end
-  resources :posts, except: [:destroy]
+  get '/posts/poll', to: 'posts#poll'
+
+  resources :posts, except: [:destroy] do
+    resources :comments, conly: [:create, :show]
+  end
+  get '/posts/poll', to: 'posts#poll'
+
 end
