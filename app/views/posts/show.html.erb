@@ -1,8 +1,8 @@
-<%= render 'shared/content_title', title: @post.title %>
-
 <p class="pull-right">
-  [<%= link_to 'Edit This Post', edit_post_path(@post) %>]
+  <%= link_to 'Edit This Post', edit_post_path(@post), class: "btn btn-primary" %>
 </p>
+
+<%= render 'shared/content_title', title: @post.title %>
 
 <p>
   <%= render @post.categories %>
