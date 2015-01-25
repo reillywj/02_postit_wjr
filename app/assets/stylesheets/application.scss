@@ -42,3 +42,10 @@ div.comment_votes {
   padding: 10px;
 }
 
+span.badge {
+  margin-left: 2.5px;
+}
+
+span.badge:first-of-type {
+  margin-left: 0px;
+}

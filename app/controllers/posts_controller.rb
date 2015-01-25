@@ -5,17 +5,14 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
 
-  def show
-    # before_action set_post
-  end
-
+  def show; end
 
   def new
     @post = Post.new
   end
 
   def create
-    @post = Post.new(post_params) # My guess at create method
+    @post = Post.new(post_params)
     @post.creator = User.first # TODO: change once we have authentication
 
     if @post.save
@@ -27,9 +24,7 @@ class PostsController < ApplicationController
 
   end
 
-  def edit
-    # before_action set_post
-  end
+  def edit; end
 
   def update
     # before_action set_post
