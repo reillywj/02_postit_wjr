@@ -1,17 +1,17 @@
 <%= render 'shared/content_title', title: @post.title %>
 
-<h5>
-  <span>By <%= @post.creator.username%></span>
-  <small>at <%= @post.created_at%></small>
-</h5>
+<p class="pull-right">
+  [<%= link_to 'Edit This Post', edit_post_path(@post) %>]
+</p>
 
 <p>
   <%= render @post.categories %>
 </p>
 
 <div class='row'>
-  <div class='span8 well'>
+  <div class='well'>
     <p><%= @post.description %></p>
+    
   </div>
 </div>
 
@@ -21,7 +21,7 @@
 
 <% @post.comments.each do |comment| %>
   <div class='row'>
-    <div class='span8 well'>
+    <div class='well'>
       <p>
         <%= comment.body %>
         <span class='quiet'>says <%= comment.creator.username%></span>

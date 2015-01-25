@@ -2,7 +2,7 @@
 
 <% @posts.each do |post| %>
   <div class = 'row'>
-    <div class= 'span8 well'>
+    <div class= 'well'>
       <%= render post.categories %>
       <h4><%= link_to post.title, post_path(post)%></h4>
       <p><%= post.description %></p>
