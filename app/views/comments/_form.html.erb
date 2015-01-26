@@ -1,8 +1,8 @@
 <!-- Comment Form -->
-
+<%= render 'shared/errors', object: @comment %>
 
 <%= form_for [@post, @comment] do |f| %>
-  
+  <%= f.text_area :body %> <!-- Add placeholder??? -->
   <br/>
   <%= f.submit "Submit Comment", class: "btn btn-primary"%>
 <% end %>

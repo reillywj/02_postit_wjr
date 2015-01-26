@@ -1,0 +1,22 @@
+<%= render 'shared/content_title', title: "Add New Category" %>
+
+<% if @category.errors.any? %>
+  <div class='row'>
+    <div class='alert alert-error'>
+      <h4>Invalid Category</h4>
+      <ul>
+        <% @category.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
+<div class='well'>
+  <%= form_for @category do |f| %>
+    <%= f.label :name, "Category" %>
+    <%= f.text_field :name %>
+    <br/>
+    <%= f.submit "Add Category", class: "btn btn-primary" %>
+  <% end %>
+</div>

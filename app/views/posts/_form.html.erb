@@ -1,16 +1,5 @@
 <!-- Post form template -->
-<% if @post.errors.any? %>
-  <div class='row'>
-    <div class='alert alert-error'>
-      <h4><%= pluralize(@post.errors.size,"Error") %></h4>
-      <ul>
-        <% @post.errors.full_messages.each do |msg| %>
-          <li><%= msg%></li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-<% end %>
+<%= render 'shared/errors', object: @post %>
 
 <div class='well'>
 <%= form_for @post do |f| %>

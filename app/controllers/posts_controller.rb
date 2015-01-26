@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update]
+  before_action :set_new_comment, only: [:show]
 
   def index
     @posts = Post.all
@@ -44,5 +45,10 @@ class PostsController < ApplicationController
 
   def set_post
     @post = Post.find(params[:id])
+  end
+
+  def set_new_comment
+    @comment = Comment.new
+    @comment.creator = User.first
   end
 end

@@ -1,5 +1,5 @@
 <p class="pull-right">
-  <%= link_to 'Edit This Post', edit_post_path(@post), class: "btn btn-primary" %>
+  <%= link_to 'Edit Post', edit_post_path(@post), class: "btn btn-inverse" %>
 </p>
 
 <%= render 'shared/content_title', title: @post.title %>
@@ -18,6 +18,8 @@
 <% if @post.comments.size > 0 %>
 <h6><%= @post.comments.size %> Comments</h6>
 <% end %>
+
+<%= render 'comments/form' %>
 
 <% @post.comments.each do |comment| %>
   <div class='row'>
