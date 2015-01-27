@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :set_new_comment, only: [:show]
 
   def index
-    @posts = Post.all
+    @posts = Post.all.sort_by{|post| post[:created_at]}.reverse
   end
 
   def show; end
@@ -13,8 +13,6 @@ class PostsController < ApplicationController
   end
 
   def create
-    binding.pry
-    
     @post = Post.new(post_params)
     @post.creator = User.first # TODO: change once we have authentication
 

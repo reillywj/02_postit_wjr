@@ -23,14 +23,14 @@
 
 <%= render 'comments/form' %>
 
-<% @post.comments.each do |comment| %>
+<% @post.comments.sort_by{|com| com[:created_at]}.reverse.each do |comment| %>
   <div class='row'>
     <div class='well'>
       <p>
         <em>"<%= comment.body %>"</em>
         <br/>
         <span class='quiet'>says</span> <%= link_to comment.creator.username, post_path(@post) %>
-        <small><%= comment.created_at %></small>
+        <small><%= tell_time_posted(comment.created_at) %></small>
       </p>
 
     </div>
