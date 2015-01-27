@@ -13,6 +13,8 @@ class PostsController < ApplicationController
   end
 
   def create
+    binding.pry
+    
     @post = Post.new(post_params)
     @post.creator = User.first # TODO: change once we have authentication
 

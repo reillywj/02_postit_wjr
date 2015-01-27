@@ -4,8 +4,9 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = Comment.new(params.require(:comment).permit(:body))
     @comment.creator = User.first
+    
     if @comment.save
-      @comment.post = @post
+      @comment.post = @post # adding this here to cover when the comment cannot be saved due to being empty.  Otherwise, shows a blank comment at the bottom of the list of comments.
       @comment.save
       flash[:notice] = "Comment successfully added!"
       redirect_to post_path(@post)
@@ -13,13 +14,4 @@ class CommentsController < ApplicationController
       render 'posts/show'
     end
   end
-
-  def show
-    flash[:notice] = "You went through the Comments show action!!!"
-    @post = Comment.find(params[:id]).post
-    redirect_to post_path(@post)
-  end
-
-
-
 end
