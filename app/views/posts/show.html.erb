@@ -1,6 +1,8 @@
-<p class="pull-right">
-  <%= link_to 'Edit Post', edit_post_path(@post), class: "btn btn-inverse" %>
-</p>
+<% if logged_in? %>
+  <p class="pull-right">
+    <%= link_to 'Edit Post', edit_post_path(@post), class: "btn btn-inverse" %>
+  </p>
+<% end %>
 
 <% post_title = link_to(@post.title, fix_url(@post.url)) %>
 
@@ -13,7 +15,6 @@
 <div class='row'>
   <div class='well'>
     <p><%= @post.description %></p>
-    
   </div>
 </div>
 
@@ -21,7 +22,9 @@
 <h6><%= @post.comments.size %> Comments</h6>
 <% end %>
 
+<% if logged_in? %>
 <%= render 'comments/form' %>
+<% end %>
 
 <% @post.comments.sort_by{|com| com[:created_at]}.reverse.each do |comment| %>
   <div class='row'>
@@ -29,7 +32,7 @@
       <p>
         <em>"<%= comment.body %>"</em>
         <br/>
-        <span class='quiet'>says</span> <%= link_to comment.creator.username, post_path(@post) %>
+        <span class='quiet'>says</span> <%= link_to comment.creator.username, user_path(comment.creator) %>
         <small><%= tell_time_posted(comment.created_at) %></small>
       </p>
 

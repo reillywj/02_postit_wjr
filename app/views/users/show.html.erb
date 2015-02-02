@@ -1,0 +1,38 @@
+<%= render "shared/content_title", title: "Profile: #{@user.username}" %>
+
+<div class="well">
+  <div class="control-group">
+    <strong>Username: </strong><%= @user.username %>
+  </div>
+  <div class="control-group">
+    <strong>Time zone: </strong> Holder for Time Zone
+  </div>
+</div>
+
+<h6><%= @user.username %>'s Activity</h6>
+
+<ul class="nav nav-tabs" id="userTab">
+  <li class="active"><a href="#posts" data-toggle="tab"><%= "Posts (#{@user.posts.size})"%></a></li>
+  <li><a href="#comments" data-toggle="tab"><%= "Comments (#{@user.comments.size})" %></a></li>
+</ul>
+
+<div id="userTabContent" class="tab-content">
+  <div class="tab-pane fade active in" id="posts">
+    <% @user.posts.sort_by{|pos| pos.created_at}.reverse.each do |pos| %>
+      <%= render "posts/post_preview", post: pos %>
+    <% end %>
+  </div>
+  <div class="tab-pane fade" id="comments">
+    <% @user.comments.sort_by{|c| c.created_at}.reverse.each do |comment| %>
+      <div class="row">
+        <div class="well">
+          <p>
+            <h6><%= link_to comment.post.title, post_path(comment.post)%></h6>
+            <em>"<%= comment.body%>"</em>
+            <small><%= tell_time_posted(comment.created_at) %></small>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

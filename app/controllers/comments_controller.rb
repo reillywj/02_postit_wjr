@@ -1,9 +1,10 @@
 class CommentsController < ApplicationController
-
+  before_action :require_user
+  
   def create
     @post = Post.find(params[:post_id])
     @comment = Comment.new(params.require(:comment).permit(:body))
-    @comment.creator = User.first
+    @comment.creator = current_user
     
     if @comment.save
       @comment.post = @post # adding this here to cover when the comment cannot be saved due to being empty.  Otherwise, shows a blank comment at the bottom of the list of comments.
