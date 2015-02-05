@@ -1,9 +1,3 @@
-<% if logged_in? %>
-  <p class="pull-right">
-    <%= link_to 'Edit Post', edit_post_path(@post), class: "btn btn-inverse" %>
-  </p>
-<% end %>
-
 <% post_title = link_to(@post.title, fix_url(@post.url)) %>
 
 <p>
@@ -11,7 +5,15 @@
 </p>
 <hr/>
 
+<% if logged_in? %>
+  <p class="pull-right">
+    <%= link_to 'Edit Post', edit_post_path(@post), class: "btn btn-inverse" %>
+  </p>
+<% end %>
+
 <%= render 'shared/content_title', title: post_title %>
+
+
 
 <div class='row'>
   <div class='span'>
