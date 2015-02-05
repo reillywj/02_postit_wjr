@@ -1,7 +1,8 @@
 <% show_post ||= false %>
 
 <div class='row'>
-  <div class='well'>
+  <%= render 'comments/vote_comment', voteable_obj: comment %>
+  <div class='well span6'>
     <em>"<%= comment.body %>"</em>
     <% if show_post %>
     on <%= link_to comment.post.title, post_path(comment.post) %>

@@ -6,17 +6,19 @@
 
 <% post_title = link_to(@post.title, fix_url(@post.url)) %>
 
-<%= render 'shared/content_title', title: post_title %>
-
 <p>
   <%= render @post.categories %>
 </p>
+<hr/>
+
+<%= render 'shared/content_title', title: post_title %>
 
 <div class='row'>
-  <div class='well'>
+  <div class='span'>
     <p><%= @post.description %></p>
   </div>
 </div>
+<hr/>
 
 <% if @post.comments.size > 0 %>
   <h6><%= @post.comments.size %> Comments</h6>

@@ -5,3 +5,7 @@
 <% @category.posts.sort_by{|postsort| postsort[:created_at]}.reverse.each do |post| %>
 <%= render 'posts/post_preview', post: post %>
 <% end %>
+
+<% if @category.posts.empty? %>
+  
+<% end %>

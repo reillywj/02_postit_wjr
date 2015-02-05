@@ -1,0 +1,17 @@
+<% user_can_vote = voteable_obj.votes.select{|vote| vote.creator == current_user}.empty? && logged_in? %>
+
+<div class= 'well span1' align="center">
+  <% if user_can_vote %>
+    <%= link_to vote_post_comment_path(voteable_obj.post, voteable_obj, vote: true), method: "post" do %>
+      <i class='icon-plus'></i>
+    <% end %>
+    <br/>
+  <% end %>
+  <%= pluralize(voteable_obj.total_votes, "Vote") %>
+  <% if user_can_vote %>
+    <br/>
+    <%= link_to vote_post_comment_path(voteable_obj.post, voteable_obj, vote: false), method: "post" do %>
+      <i class='icon-minus'></i>
+    <% end %>
+  <% end %>
+</div>
