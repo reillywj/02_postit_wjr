@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :vote]
   before_action :set_new_comment, only: [:show]
   before_action :require_user, except: [:show, :index]
+  before_action :require_creator_to_edit, only: [:edit, :update]
 
   def index
     @posts = Post.all.sort_by{|post| post[:created_at]}.reverse
@@ -62,5 +63,12 @@ class PostsController < ApplicationController
   def set_new_comment
     @comment = Comment.new
     @comment.creator = User.first
+  end
+
+  def require_creator_to_edit
+    unless current_user_is_creator?(@post)
+      flash[:errors] = "You can't do that."
+      redirect_to post_path(@post)
+    end
   end
 end
