@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
     if @vote.save
       flash[:notice] = "You voted for that comment!"
     else
-      flash[:notice] = "You already voted for that comment."
+      flash[:errors] = "You already voted for that comment."
     end
 
     redirect_to :back
