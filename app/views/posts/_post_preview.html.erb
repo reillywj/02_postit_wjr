@@ -5,7 +5,7 @@
     <h4><%= link_to post.title, post_path(post)%></h4>
     <p><%= post.description %></p>
     <p>
-      <span class='quiet'>posted by </span><%= post.creator.username %>
+      <span class='quiet'>posted by </span><%= link_to post.creator.username, user_path(post.creator) %>
       <small>Posted <%= tell_time_posted(post.created_at)%></small>
     </p>
     <hr/>
