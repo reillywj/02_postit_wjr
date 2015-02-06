@@ -5,7 +5,13 @@ class PostsController < ApplicationController
   before_action :require_creator_to_edit, only: [:edit, :update]
 
   def index
-    @posts = Post.all.sort_by{|post| post[:created_at]}.reverse
+    @posts = Post.all.sort do |x, y|
+      unless (y.total_votes <=> x.total_votes) == 0
+        y.total_votes <=> x.total_votes
+      else
+        y.created_at <=> x.created_at
+      end
+    end
   end
 
   def show; end
