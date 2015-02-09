@@ -1,0 +1,1 @@
+$("#comment_<%= @comment.id %>_vote").html("<%= escape_javascript(render 'comments/vote_comment', voteable_obj: @comment) %>")

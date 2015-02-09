@@ -19,13 +19,16 @@ class CommentsController < ApplicationController
   def vote
     @comment = Comment.find(params[:id])
     @vote = Vote.new(vote: params[:vote], voteable: @comment, creator: current_user)
+
     if @vote.save
-      flash[:notice] = "You voted for that comment!"
+      respond_to do |format|
+        format.html {redirect_to :back, notice: "Your vote counted for that comment."}
+        format.js
+      end
     else
       flash[:errors] = "You already voted for that comment."
+      redirect_to :back
     end
-
-    redirect_to :back
   end
 
 end
