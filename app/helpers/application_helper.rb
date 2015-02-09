@@ -10,7 +10,7 @@ module ApplicationHelper
     when 11..60 then "Seconds Ago"
     when 61..(60*60) then "Minutes Ago"
     when (60*60+1)..(60*60*12) then "Hours Ago"
-    else time.strftime("%A, %B %d, %Y")
+    else time.strftime("%A, %B %d, %Y %H:%M%P %Z")
     end
   end
 end
