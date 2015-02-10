@@ -2,7 +2,7 @@
 
 <%= render 'shared/content_title', title: header %>
 
-<% @category.posts.sort_by{|postsort| postsort[:created_at]}.reverse.each do |post| %>
+<% @category.posts.sort{|x, y| x.total_votes <=> y.total_votes}.reverse.each do |post| %>
 <%= render 'posts/post_preview', post: post %>
 <% end %>
 

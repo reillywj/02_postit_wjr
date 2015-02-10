@@ -9,7 +9,7 @@
     Categories <span class="caret"></span>
   </button>
   <ul class='dropdown-menu'>
-    <% Category.all.sort_by{|c| c[:name].capitalize}.each do |cat| %>
+    <% Category.all.sort{|x, y| x.name.downcase <=> y.name.downcase}.each do |cat| %>
     <li><%= link_to cat.name, category_path(cat) %></li>
     <% end %>
     <% if logged_in? %>
