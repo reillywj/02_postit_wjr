@@ -30,6 +30,6 @@
   <% end %>
 <% elsif params[:tab] == 'comments' %>
   <% @user.comments.sort_by{|c| c.created_at}.reverse.each do |comment| %>
-    <%= render "comments/comment", comment: comment, show_post: true %>
+    <%= render "comments/comment", comment: comment %>
   <% end %>
 <% end %>

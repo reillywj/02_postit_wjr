@@ -1,7 +1,7 @@
 <% show_post ||= false %>
 
 <div class='row'>
-  <div id="comment_<%= comment.id%>_vote">
+  <div id="comment_<%= comment.id %>_vote">
     <%= render 'comments/vote_comment', voteable_obj: comment %>
   </div>
   <div class='well span6'>
