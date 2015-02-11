@@ -50,7 +50,8 @@ class PostsController < ApplicationController
 
     if @vote.save
       respond_to do |format|
-        format.html { redirect_to :back, notice: "Your vote was counted."}
+        flash[:notice] = "Your vote was counted."
+        format.html { redirect_to :back}
         format.js
       end
     else
