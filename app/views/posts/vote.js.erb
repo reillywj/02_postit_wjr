@@ -1,1 +1,1 @@
-$("#post_<%= @post.id %>_votes").html("<%= escape_javascript(render 'posts/vote_post', voteable_obj: @post) %>")
+$("#post_<%= @post.slug %>_votes").html("<%= escape_javascript(render 'posts/vote_post', voteable_obj: @post) %>")
