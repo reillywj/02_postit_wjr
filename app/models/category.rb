@@ -5,7 +5,7 @@ class Category < ActiveRecord::Base
   before_save :generate_slug
 
   def generate_slug
-    self.slug = self.name.gsub(/[\s\W]/,"-").gsub(/-+/,"-").gsub(/-$/,"")
+    self.slug = self.name.parameterize
   end
 
   def to_param

@@ -24,7 +24,7 @@ class Post < ActiveRecord::Base
   end
 
   def generate_slug
-    self.slug = self.title.gsub(/[\s\W]/,"-").gsub(/-+/,"-").gsub(/-$/,"")
+    self.slug = self.title.parameterize
   end
 
   def to_param
