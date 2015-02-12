@@ -24,7 +24,22 @@ class Post < ActiveRecord::Base
   end
 
   def generate_slug
-    self.slug = self.title.parameterize
+    base_slug = to_slug(self.title)
+    potential_slug = base_slug
+    post = Post.find_by slug: base_slug
+
+    count = 2
+    while post && post != self
+      potential_slug = base_slug + "-" + count.to_s
+      post = Post.find_by slug: potential_slug
+      count += 1
+    end
+    self.slug = potential_slug
+  end
+
+  def to_slug(str)
+    output = str.parameterize.downcase
+    output
   end
 
   def to_param

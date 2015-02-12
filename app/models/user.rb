@@ -9,7 +9,22 @@ class User < ActiveRecord::Base
   before_save :generate_slug
 
   def generate_slug
-    self.slug = self.username.parameterize
+    base_slug = to_slug(self.username)
+    potential_slug = base_slug
+    user = User.find_by slug: base_slug
+
+    count = 2
+    while user && user != self
+      potential_slug = base_slug + "-" + count.to_s
+      user = User.find_by slug: potential_slug
+      count += 1
+    end
+    self.slug = potential_slug
+  end
+
+  def to_slug(str)
+    output = str.parameterize.downcase
+    output
   end
 
   def to_param
