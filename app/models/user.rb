@@ -9,6 +9,13 @@ class User < ActiveRecord::Base
 
   sluggable_column :username  
 
+  def admin?
+    self.user_type == "admin"
+  end
+
+  def moderator?
+    self.user_type = "moderator"
+  end
 
   def self.admin_count
     self.where(user_type: "admin").size

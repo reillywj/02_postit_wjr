@@ -2,7 +2,7 @@
 
 <% if user_is_current_user_or_admin? %>
   <p class="inline">
-    <%= link_to "edit profile", edit_user_path(current_user), class: "btn btn-inverse" %>
+    <%= link_to "edit profile", edit_user_path(@user), class: "btn btn-inverse" %>
   </p>
 <% end %>
 
@@ -10,6 +10,16 @@
   <dl class='dl-horizontal'>
     <dt>Username:</dt>
     <dd><%= @user.username %></dd>
+    <dt>Time Zone:</dt>
+    <% if @user.time_zone.blank? %>
+      <dd><%= Time.zone.name%></dd>
+    <% else %>
+      <dd><%= @user.time_zone %></dd>
+    <% end %>
+    <% if logged_in? and current_user.admin? && @user.admin? %>
+      <dt>Permissions:</dt>
+      <dd><%= @user.user_type %></dd>
+    <% end %>
   </dl>
 </div>
 
@@ -30,6 +40,6 @@
   <% end %>
 <% elsif params[:tab] == 'comments' %>
   <% @user.comments.sort_by{|c| c.created_at}.reverse.each do |comment| %>
-    <%= render "comments/comment", comment: comment %>
+    <%= render "comments/comment", comment: comment, show_post: true %>
   <% end %>
 <% end %>
