@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
+  before_action :require_admin, only: [:index]
   before_action :set_user, only: [:show, :edit, :update]
-  before_action :require_same_user, only: [:edit, :update]
+  before_action :require_same_user_or_admin, only: [:edit, :update]
+
+  def index
+    @users = User.all.sort{|x,y| x.username.downcase <=> y.username.downcase}
+  end
 
   def show
   end
@@ -13,8 +18,12 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       flash[:notice] = "#{@user.username} registered successfully!"
-      session[:user_id] = @user.id
-      redirect_to root_path
+      unless logged_in? && current_user_is_admin?
+        session[:user_id] = @user.id
+        redirect_to root_path
+      else
+        redirect_to users_path
+      end
     else
       render :new
     end
@@ -34,7 +43,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :password)
+    params.require(:user).permit(:username, :password, :user_type)
   end
 
   def set_user
@@ -43,8 +52,18 @@ class UsersController < ApplicationController
 
   def require_same_user
     if current_user != @user
-      flash[:error] = "You're not allowed to do that."
-      redirect_to root_path
+      error_message
     end
+  end
+
+  def require_same_user_or_admin
+    unless (current_user == @user) || (current_user.user_type == "admin")
+      error_message
+    end
+  end
+
+  def error_message
+    flash[:error] = "You're not allowed to do that."
+    redirect_to root_path
   end
 end

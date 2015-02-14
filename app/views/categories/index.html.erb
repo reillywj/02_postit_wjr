@@ -1,0 +1,22 @@
+<%= render 'shared/content_title', title: "Categories" %>
+
+<div class="row">
+  <div class="span">
+    <%= link_to "Add New Category", new_category_path, class: "btn btn-success" %>
+  </div>
+  <div class="span">
+    <%= link_to "Back to Root", root_path, class: "btn" %>
+  </div>
+</div>
+<hr/>
+<h4>Edit Categories</h4>
+<br/>
+<% @categories.each do |category| %>
+  <p>
+    <%= link_to(edit_category_path(category), class: 'btn btn-warning') do %>
+      <i class="icon-edit icon-white"></i> <%= category.name %>
+    <% end %>
+  </p>
+
+  <br/>
+<% end %>

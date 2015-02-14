@@ -1,0 +1,17 @@
+<div class="span well">
+  <h4><%= user.username %></h4>
+  <h6>Joined: <%= tell_time_created(user.created_at) %></h6>
+
+  <p><%= pluralize(user.posts.size, "Posts")%></p>
+  <p><%= pluralize(user.comments.size, "Comments")%>
+  <p><%= pluralize(user.votes.size, "Vote")%></p>
+
+  <%= link_to(user_path(user), class: "btn btn-primary", title: "View #{user.username}'s Profile") do %>
+    View
+  <% end %>
+
+  <%= link_to(edit_user_path(user), class: "btn btn-warning", title: "Edit #{user.username}'s Profile") do %>
+    Edit
+  <% end %>
+
+</div>  

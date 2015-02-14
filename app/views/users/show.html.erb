@@ -1,6 +1,6 @@
 <%= render "shared/content_title", title: "Profile: #{@user.username}" %>
 
-<% if @user == current_user %>
+<% if user_is_current_user_or_admin? %>
   <p class="inline">
     <%= link_to "edit profile", edit_user_path(current_user), class: "btn btn-inverse" %>
   </p>

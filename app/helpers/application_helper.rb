@@ -13,4 +13,8 @@ module ApplicationHelper
     else time.strftime("%A, %B %d, %Y %H:%M%P %Z")
     end
   end
+
+  def tell_time_created(time)
+    time.strftime("%b %d, %y")
+  end
 end

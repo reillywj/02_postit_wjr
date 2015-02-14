@@ -12,9 +12,10 @@
     <% Category.all.sort{|x, y| x.name.downcase <=> y.name.downcase}.each do |cat| %>
     <li><%= link_to cat.name, category_path(cat) %></li>
     <% end %>
-    <% if logged_in? %>
+    <% if admin_logged_in? %>
       <li class='divider'></li>
       <li><%= link_to "Add Category", new_category_path %></li>
+      <li><%= link_to "View Categories", categories_path %></li>
     <% end %>
   </ul>
 </div>
@@ -30,6 +31,15 @@
       <span class='caret'></span>
     <% end %>
     <ul class='dropdown-menu'>
+      <% if admin_logged_in? %>
+        <li>
+          <%= link_to users_path do %>
+            <i class="icon-list-alt"></i>
+            View All Users
+          <% end %>
+        </li>
+        <li class="divider"></li>
+      <% end %>
       <li>
         <%= link_to edit_user_path(current_user) do %>
           <i class="icon-pencil"></i>
@@ -42,6 +52,7 @@
           view profile
         <% end %>
       </li>
+      <li class="divider"></li>
       <li>
         <%= link_to logout_path do %>
           <i class="icon-circle-arrow-left"></i>

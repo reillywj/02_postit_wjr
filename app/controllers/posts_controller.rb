@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :vote]
   before_action :set_new_comment, only: [:show]
   before_action :require_user, except: [:show, :index]
-  before_action :require_creator_to_edit, only: [:edit, :update]
+  before_action :require_creator_or_admin_to_edit, only: [:edit, :update]
 
   def index
     @posts = Post.all.sort do |x, y|
@@ -77,8 +77,19 @@ class PostsController < ApplicationController
 
   def require_creator_to_edit
     unless current_user_is_creator?(@post)
-      flash[:errors] = "You can't do that."
-      redirect_to post_path(@post)
+      you_cant_do_that
     end
   end
+
+  def require_creator_or_admin_to_edit
+    unless current_user_is_creator?(@post) || current_user_is_admin?
+      you_cant_do_that
+    end
+  end
+
+  def you_cant_do_that
+    flash[:errors] = "You can't do that."
+    redirect_to post_path(@post)
+  end
+
 end

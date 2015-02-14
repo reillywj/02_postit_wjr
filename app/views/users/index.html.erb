@@ -1,0 +1,23 @@
+<%= render "shared/content_title", title: "All Users" %>
+
+<%= link_to "Add User", register_path, class: "btn btn-primary" %>
+
+
+<h4><%= pluralize(User.admin_count, "Admin")%></h4>
+<br/>
+<div class="row">
+  <% @users.select{|user| user.user_type == "admin"}.sort{|x,y| x.username.downcase <=> y.username.downcase}.each do |user| %>
+      <%= render "user_preview_by_admin", user: user %>
+  <% end %>
+</div>
+
+
+<hr/>
+<h4><%= pluralize(User.non_admin_count, "Non-Admin User")%></h4>
+<br/>
+<div class="row">
+  <% @users.select{|user| user.user_type != "admin"}.sort{|x,y| x.username.downcase <=> y.username.downcase}.each do |user| %>
+    <%= render 'user_preview_by_admin', user: user %>
+  <% end %>
+</div>
+

@@ -5,7 +5,7 @@
 </p>
 <hr/>
 
-<% if logged_in? && current_user_is_creator?(@post) %>
+<% if logged_in? && (current_user_is_creator?(@post) || current_user_is_admin?) %>
   <p class="pull-right">
     <%= link_to 'Edit Post', edit_post_path(@post), class: "btn btn-inverse" %>
   </p>

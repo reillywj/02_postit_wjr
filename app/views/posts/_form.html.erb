@@ -24,6 +24,11 @@
     <% end %>
   </div>
 
-  <%= f.submit submit_text, class: "btn btn-primary" %>
+  <div class='control-group'>
+    <%= f.submit submit_text, class: "btn btn-primary" %>
+  </div>
+  <div class='control-group'>
+    <%= link_to "Cancel", post_path(@post), type: "button", class: "btn btn-inverse" %>
+  </div>
 <% end %>
 </div>

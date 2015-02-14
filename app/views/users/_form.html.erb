@@ -11,6 +11,13 @@
     <%= f.password_field :password %>
   </div>
 
+  <% if logged_in? && current_user_is_admin? %>
+    <div class="control-group">
+      <%= f.label :user_type %>
+      <%= f.text_field :user_type %>
+    </div>
+  <% end %>
+
   <%= f.submit submit_button_text, class: "btn btn-primary" %>
 
   <% end %>
